@@ -5,30 +5,26 @@
 	<link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-	<div class="container">
 		<div class="header">
 			<h1>Quiz</h1>
 		</div>
-		<div class="tally">
-			<h2>Question <span class="js-question-count"></span>/10</h2>
-			<h2><span class="js-amt-correct"></span> correct, <span class="js-amt-incorrect"></span> incorrect</h2>
-		</div>
-		<div class="question">
-			<h3>Who is the best player in the National Hockey League?</h3>
-			<ul class="js-list">
-				<!-- <li><button type="submit" class="answer js-correct-answer">A. Alex Ovechkin</button></li>
-				<li><button type="submit" class="answer">B. Alex Ovechkin</button></li>
-				<li><button type="submit" class="answer">C. Alex Ovechkin</button></li>
-				<li><button type="submit" class="answer">D. Alex Ovechkin</button></li> -->
-			</ul>
-			<button type ="submit" class="next">Next ></button>
-		</div>
-		<div class="landing hidden">
+		<div class="landing">
 			<form>
 				<label>Click below to enter the quiz.</label>
-				<button type="submit" id="js-enter-button">Enter</button>
+				<button type="button" id="js-enter-button">Enter</button>
 			</form>
 		</div>
+		<main>
+			<div class="tally">
+				<h2>Question <span class="js-question-count"></span>/10</h2>
+				<h2><span class="js-amt-correct"></span> correct, <span class="js-amt-incorrect"></span> incorrect</h2>
+			</div>
+			<div class="question">
+				<h3>Who is the best player in the National Hockey League?</h3>
+				<ul class="js-list"></ul>
+				<button type ="submit" class="next">Next ></button>
+			</div>
+		</main>
 		<div class="footer"></div>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>

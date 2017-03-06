@@ -1,6 +1,9 @@
 var state = {
-    answers: [{text: "A. Alex Ovechkin", correct: true, default: true}, {text: "B. Alex Ovechkin", correct: false, default: true}, {text: "C. Alex Ovechkin", correct: false, default: true}, {text: "D. Alex Ovechkin", correct: false, default: true}]
+    questions: ['Who is the best player in the National Hockey League?', 'What is your favorite color?'],
+    answers: [{text: "A. Alex Ovechkin", correct: true, default: true}, {text: "B. Alex Ovechkin", correct: false, default: true}, {text: "C. Alex Ovechkin", correct: false, default: true}, {text: "D. Alex Ovechkin", correct: false, default: true}, {text: "A. Blue", correct: true, default: true}, {text: "B. Green", correct: false, default: true}, {text: "C. Orange", correct: true, default: true}, {text: "D. Red", correct: true, default: true}]
 };
+
+
 
 var correctAnswers = 0;
 
@@ -26,6 +29,7 @@ var checkAnswer = function(state, answerText) {
 
 
 
+
 // Render function
 
 var renderList = function(state, element) {
@@ -33,15 +37,19 @@ var renderList = function(state, element) {
 
         var beginListItem = "";
 
-        if (answer.default) {
-        	 beginListItem = '<li><button type="submit" class="answer default">';
-        } else if (answer.correct) {
-            beginListItem = '<li><button type="submit" class="answer correct">';
-        } else {
-            beginListItem = '<li><button type="submit" class="answer incorrect">';
-        }
+        // if ((answer.index()) < 4) {
 
-        return beginListItem + answer.text + '</button></li>';
+            if (answer.default) {
+            	 beginListItem = '<li><button type="submit" class="answer default">';
+            } else if (answer.correct) {
+                beginListItem = '<li><button type="submit" class="answer correct">';
+            } else {
+                beginListItem = '<li><button type="submit" class="answer incorrect">';
+            }
+
+            return beginListItem + answer.text + '</button></li>';
+
+        // };
     });
     element.html(itemsHTML);
     $('.js-amt-correct').text(correctAnswers);
@@ -53,16 +61,16 @@ var renderList = function(state, element) {
 
 $(function() { 
 
-    // $('#js-enter-button').on('click', function(event) {
-    // 	$('.landing').closest('div').addClass("hidden");
-    // });
-
     renderList(state, $('.js-list'));
+
+    $('#js-enter-button').on('click', function(event) {
+        event.preventDefault;
+        $(this).closest('div').addClass('hidden');
+    });
 
     $('.answer').on('click', function(event) {
     	event.preventDefault;
     	checkAnswer(state, $(this).closest("li").find('.answer').text());;
-
     	renderList(state, $('.js-list'));
     });
 
