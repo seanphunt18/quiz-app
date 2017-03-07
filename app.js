@@ -1,6 +1,5 @@
 var state = {
-    questions: ['Who is the best player in the National Hockey League?', 'What is your favorite color?'],
-    answers: [{text: "A. Alex Ovechkin", correct: true, default: true}, {text: "B. Alex Ovechkin", correct: false, default: true}, {text: "C. Alex Ovechkin", correct: false, default: true}, {text: "D. Alex Ovechkin", correct: false, default: true}, {text: "A. Blue", correct: true, default: true}, {text: "B. Green", correct: false, default: true}, {text: "C. Orange", correct: true, default: true}, {text: "D. Red", correct: true, default: true}]
+    answers: [{text: "A. Alex Ovechkin", correct: true, default: true}, {text: "B. Alex Ovechkin", correct: false, default: true}, {text: "C. Alex Ovechkin", correct: false, default: true}, {text: "D. Alex Ovechkin", correct: false, default: true}]
 };
 
 
