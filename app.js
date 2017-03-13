@@ -3,7 +3,6 @@ var state = {
 };
 
 
-
 var correctAnswers = 0;
 
 var incorrectAnswers = 0;
