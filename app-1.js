@@ -14,42 +14,47 @@ function Question (text, answerChoices, correctAnswer){
     this.correctAnswer = correctAnswer;
 }
 
-var ques1 = new Question("What is the capital of Maryland?", ["Annapolis", "Baltimore", "Frederick", "Salisbury"], "1");
+var ques1 = new Question("What is the capital of Maryland?", ["Annapolis", "Baltimore", "Frederick", "Salisbury"], 0);
 
 state.questions.push(ques1);
 
 
-var ques2 = new Question("What is the state bird of Maryland?", ["Cardinal", "Oriole", "Blue Jay", "Raven"], "2");
+var ques2 = new Question("What is the state bird of Maryland?", ["Cardinal", "Oriole", "Blue Jay", "Raven"], 1);
 
 state.questions.push(ques2);
 
-var ques3 = new Question("What is the state sport of Maryland?", ["Jousting", "Lacrosse", "Baseball", "Soccer"], "1");
+var ques3 = new Question("What is the state sport of Maryland?", ["Jousting", "Lacrosse", "Baseball", "Soccer"], 0);
 
 state.questions.push(ques3);
 
-var ques4 = new Question("What is the state flower of Maryland?", ["Sunflower", "Tulip", "Dandelion", "Black-eyed Susan"], "4");
+var ques4 = new Question("What is the state flower of Maryland?", ["Sunflower", "Tulip", "Dandelion", "Black-eyed Susan"], 3);
 
 state.questions.push(ques4);
 
-var ques5 = new Question("Which color does NOT appear on the Maryland flag?", ["Black", "Red", "Blue", "Yellow"], "3");
+var ques5 = new Question("Which color does NOT appear on the Maryland flag?", ["Black", "Red", "Blue", "Yellow"], 2);
 
 state.questions.push(ques5);
 
 
 var checkAnswer = function(state, answerText) {
-    for (var i=0; i<state.questions[state.currentQuestionIndex].answerChoices.length; i++) {
-        if (state.questions[state.currentQuestionIndex].answerChoices[i].text == answerText) {
-            state.questions[state.currentQuestionIndex].answerChoices[i].closest("li").removeClass("default");
-            if (state.questions[state.currentQuestionIndex].answerChoices[i].index == state.questions[state.currentQuestionIndex].correctAnswer) {
-                correctAnswers ++;
-            } else {
-                incorrectAnswers ++;
-            }
-        } else if (state.questions[state.currentQuestionIndex].answerChoices[i].index == state.questions[state.currentQuestionIndex].correctAnswer) {
-            state.questions[state.currentQuestionIndex].answerChoices[i].closest("li").removeClass("default");;
+    
+    var cqi = state.questions[state.currentQuestionIndex];
+
+    for (var i=0; i<cqi.answerChoices.length; i++) {
+            if (cqi.answerChoices[i] == answerText) {
+                if (i == cqi.correctAnswer) {
+                    state.correctAnswers ++;
+                    $(".js-amt-correct").text(state.correctAnswers);
+                } else {
+                    state.incorrectAnswers ++;
+                    $(".js-amt-incorrect").text(state.incorrectAnswers);
+                }
+            } else if (i == cqi.correctAnswer) {
+            //cqi.answerChoices[i].closest("li").removeClass("default");
         }
     }
 }
+
 
 
 // Render function
@@ -90,7 +95,7 @@ $(function() {
 
     $('.answer').on("click", function(event) {
         event.preventDefault;
-        checkAnswer(state, $(this).closest("li").find('.answer').text());
+        checkAnswer(state, $(this).text());
     });
 
     $('.next').on("click", function(event) {
