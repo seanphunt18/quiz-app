@@ -64,11 +64,12 @@ var checkAnswer = function(state, answerElement) {
 }
 
 var reset = function(state) {
-    state.correctAnswers = 0;
-    state.incorrectAnswers = 0;
-    state.currentQuestionIndex = -1;
-    $('.landing').removeClass('hidden');
-    $('.next').addClass('hidden');
+        state.correctAnswers = 0;
+        state.incorrectAnswers = 0;
+        state.currentQuestionIndex = -1;
+        $('.landing').removeClass('hidden');
+        $('.next').removeClass('hidden');
+        $('.retake').addClass('hidden');
 };
 
 // Render function
@@ -76,6 +77,8 @@ var reset = function(state) {
 function renderNextQuestion (state) {
 
     $('.next').prop('disabled', true);
+
+    $('.retake').prop('disabled', true);
 
     state.currentQuestionIndex++;
 
@@ -91,6 +94,11 @@ function renderNextQuestion (state) {
     $(".js-amt-incorrect").text(state.incorrectAnswers);
 
     $('.js-list').empty();
+
+    if (state.correctAnswers + state.incorrectAnswers == 4) {
+        $('.next').addClass('hidden');
+        $('.retake').removeClass('hidden');
+    }
 
     for (var i = 0; i < state.questions[cqi].answerChoices.length; i++){
         $(".js-list").append("<li class=\"answer default\">" + state.questions[cqi].answerChoices[i] + "</li>");
@@ -115,6 +123,7 @@ $(function() {
         event.preventDefault;
         checkAnswer(state, $(this));
         $('.next').prop('disabled', false);
+        $('.retake').prop('disabled', false);
     });
 
     $('.next').on("click", function(event) {
@@ -122,4 +131,13 @@ $(function() {
         renderNextQuestion(state);
     })
 
+    $('.retake').on("click", function(event) {
+        reset(state);
+        renderNextQuestion(state);
+    })
+
 })
+
+
+
+

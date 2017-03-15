@@ -65,7 +65,7 @@ main {
 	border-radius: 5px;
 }
 
-.landing button:hover, .next:hover, .answer:hover {
+.landing button:hover, .next:hover, .answer:hover, .retake:hover {
 	background-color: royalblue;
 }
 
@@ -124,8 +124,7 @@ main {
 	padding-top: 20px;
 }
 
-.next {
-	display: block;
+.question button {
 	width: 200px;
 	height: 60px;
 	background-color: lightgrey;
