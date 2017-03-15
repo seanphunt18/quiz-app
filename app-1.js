@@ -36,8 +36,10 @@ var ques5 = new Question("Which color does NOT appear on the Maryland flag?", ["
 state.questions.push(ques5);
 
 
-var checkAnswer = function(state, answerText) {
+var checkAnswer = function(state, answerElement) {
     
+    var answerText = answerElement.text();
+
     var cqi = state.questions[state.currentQuestionIndex];
 
     for (var i=0; i<cqi.answerChoices.length; i++) {
@@ -45,21 +47,35 @@ var checkAnswer = function(state, answerText) {
                 if (i == cqi.correctAnswer) {
                     state.correctAnswers ++;
                     $(".js-amt-correct").text(state.correctAnswers);
+                    answerElement.addClass('correct');
                 } else {
                     state.incorrectAnswers ++;
                     $(".js-amt-incorrect").text(state.incorrectAnswers);
+                    answerElement.addClass('incorrect');
                 }
             } else if (i == cqi.correctAnswer) {
-            //cqi.answerChoices[i].closest("li").removeClass("default");
+                $('.js-list').children("li").each(function() {
+                    if ($(this).text() == cqi.answerChoices[cqi.correctAnswer]) {
+                        $(this).addClass('correct');
+                    }
+                })
         }
     }
 }
 
-
+var reset = function(state) {
+    state.correctAnswers = 0;
+    state.incorrectAnswers = 0;
+    state.currentQuestionIndex = -1;
+    $('.landing').removeClass('hidden');
+    $('.next').addClass('hidden');
+};
 
 // Render function
 
 function renderNextQuestion (state) {
+
+    $('.next').prop('disabled', true);
 
     state.currentQuestionIndex++;
 
@@ -73,6 +89,8 @@ function renderNextQuestion (state) {
     $(".js-amt-correct").text(state.correctAnswers);
 
     $(".js-amt-incorrect").text(state.incorrectAnswers);
+
+    $('.js-list').empty();
 
     for (var i = 0; i < state.questions[cqi].answerChoices.length; i++){
         $(".js-list").append("<li class=\"answer default\">" + state.questions[cqi].answerChoices[i] + "</li>");
@@ -93,9 +111,10 @@ $(function() {
 
     renderNextQuestion(state);
 
-    $('.answer').on("click", function(event) {
+    $('.js-list').on("click", '.answer', function(event) {
         event.preventDefault;
-        checkAnswer(state, $(this).text());
+        checkAnswer(state, $(this));
+        $('.next').prop('disabled', false);
     });
 
     $('.next').on("click", function(event) {
@@ -104,9 +123,3 @@ $(function() {
     })
 
 })
-
-
-
-
-
-
